@@ -61,3 +61,6 @@ button{
 }.itemShop{
     font-style: italic;
 }
+.crossed {
+    text-decoration: line-through;
+}

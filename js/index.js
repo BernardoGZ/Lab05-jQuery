@@ -9,18 +9,31 @@ var lista = $(".Lista");
 // 'Add Item' btn functionality
 $(".agregar").on("click", function(e){
     e.preventDefault();
-    lista.append(`<div><li class="items"> </li></div>`);
+    lista.append(`<div class="items"><li> </li></div>`);
     $(`.Lista li:last`).append(`<p> ${itemInput.val()} </p> <p><button class="check" > Check </button> <button class="delete">Delete</button></p>`);
+    itemInput.val(null);
 })
+
+var textChecked = $(".check").parent().prev();
 
 //'Check' btn functionality
+// !!! Solo funciona con el item de prueba que tengo ya definido en el index.html !!!
 $(".check").on("click", function(e){
-   e.preventDefault();
-    alert("good");
+    
+    e.preventDefault();
+    if(textChecked.hasClass("crossed")){
+        textChecked.removeClass("crossed");
+    }
+    else{
+        textChecked.addClass("crossed");
+    }    
 })
 
-// //'Delete' btn functionality
-// $(".agregar").on("click", function(){
-//     alert("good");
-// })
+var textContainer = $(".delete").parents(".items");
+
+//'Delete' btn functionality
+// !!! Solo funciona con el item de prueba que tengo ya definido en el index.html !!!
+$(".delete").on("click", function(){
+    textContainer.remove();    
+})
 
