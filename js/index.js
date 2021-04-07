@@ -6,6 +6,10 @@
 var itemInput = $("#newText");
 var lista = $(".Lista");
 
+// When having dinamic elements use the "Event Delegation" concept
+// Inside the .on method, add a second paramenter, this tells the handler to listen for the specified event, 
+// and when it hears it, check to see if the triggering element for that event matches the second parameter.
+
 // 'Add Item' btn functionality
 $(".agregar").on("click", function(e){
     e.preventDefault();
@@ -14,26 +18,18 @@ $(".agregar").on("click", function(e){
     itemInput.val(null);
 })
 
-var textChecked = $(".check").parent().prev();
-
 //'Check' btn functionality
-// !!! Solo funciona con el item de prueba que tengo ya definido en el index.html !!!
-$(".check").on("click", function(e){
+lista.on("click",".check", function(e){
     
     e.preventDefault();
-    if(textChecked.hasClass("crossed")){
-        textChecked.removeClass("crossed");
-    }
-    else{
-        textChecked.addClass("crossed");
-    }    
-})
+    $(this).parent().prev().toggleClass('crossed');
+    
+    // Es mejor hacer uso de $(this) el cual te regresará el elemento que fue invocado en el click y a partir de ese puedes navegar hacia arriba o hacia abajo para llegar a donde desees. 
+    // https://api.jquery.com/category/traversing/tree-traversal/
 
-var textContainer = $(".delete").parents(".items");
+})
 
 //'Delete' btn functionality
-// !!! Solo funciona con el item de prueba que tengo ya definido en el index.html !!!
-$(".delete").on("click", function(){
-    textContainer.remove();    
+lista.on("click",".delete", function(){
+    $(this).parent().parent().remove();
 })
-
